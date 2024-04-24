@@ -1,13 +1,26 @@
+name: 打包React项目
 on: push
 
+permissions:
+  contents: write
+
 jobs:
-  job1:
+  npm-build:
+    name: npm-build工作
     runs-on: ubuntu-latest
+    
     steps:
-    - run: pwd
-    - run: ls
-  job2:
-    runs-on: windows-latest
-    steps:
-    - run: node --version
-    - run: npm --version
+    - name: 读取仓库内容
+      uses: actions/checkout@v4
+    
+    - name: 安装依赖和项目打包
+      run:  |
+        npm install
+        npm run build
+    
+    - name: 部署
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages
+        folder: build
+    
