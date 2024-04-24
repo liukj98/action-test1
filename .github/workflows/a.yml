@@ -3,9 +3,11 @@ on: push
 jobs:
   job1:
     steps:
+    runs-on: ubuntu-latest
     - run: pwd
     - run: ls
   job2:
     steps:
+    runs-on: windows-latest
     - run: node --version
     - run: npm --version
